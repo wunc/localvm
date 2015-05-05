@@ -148,39 +148,6 @@ apache:
         - proxy_fcgi
         - rewrite
     vhosts:
-        testdev:
-            servername: test.dev
-            serveraliases:
-                - www.test.dev
-            docroot: /var/www/test
-            port: '80'
-            setenv:
-                - 'APP_ENV dev'
-            custom_fragment: ''
-            ssl: '0'
-            ssl_cert: ''
-            ssl_key: ''
-            ssl_chain: ''
-            ssl_certs_dir: ''
-            directories:
-                avd_v1dyzh1p8wij:
-                    path: /var/www/test
-                    options:
-                        - Indexes
-                        - FollowSymlinks
-                        - MultiViews
-                    allow_override:
-                        - All
-                    require:
-                        - 'all granted'
-                    custom_fragment: ''
-                    files_match:
-                        avdfm_rjoze281v2uw:
-                            path: \.php$
-                            sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
-                            custom_fragment: ''
-                            provider: filesmatch
-                    provider: directory
         localdev:
             servername: local.dev
             serveraliases:
