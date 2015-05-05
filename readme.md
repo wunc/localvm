@@ -1,4 +1,4 @@
-# UTD ORIS Development Environment
+# ORIS Development Environment
 
 ### Introduction
 
@@ -22,17 +22,18 @@ This project provides a solution: a virtual machine that provides a common pre-c
 ### Installation
 
 - Install the requirements listed above
+- Put any websites that you want hosted into `~/Sites`. These will automatically be mapped to `/var/www` in the VM (using 2-way NFS)
 - Install the environment
 
 ```
 $ mkdir Vagrant
 $ cd Vagrant
-$ git clone <clone-url> localvm
+$ git clone git@github.com:wunc/localvm.git localvm
 ```
 
 - Configure as needed
-	- All of the configuration is set in one file: `puphpet/config.yaml`. One thing you may want to change: find the `chosen_provider` and set it appropriately (either to vmware_fusion or virtualbox).
-	- If you want to change any dot-files, they are located in `puphpet/files/dot`; edit them prior to starting the vm and they will be copied over to the vm on boot. If you want to override any of the default settings, create a file called `puphpet/config-custom.yaml`. Use the same style as the default `config.yaml` and change (or add) the desired setting.
+	- *modify or add components:* All of the configuration is set in one file: `puphpet/config.yaml`. One thing you may want to change: find the `chosen_provider` and set it appropriately (either to vmware_fusion or virtualbox).
+	- *customize your environment:* If you want to change any dot-files, they are located in `puphpet/files/dot`; edit them prior to starting the vm and they will be copied over to the vm on boot. If you want to override any of the default settings, create a file called `puphpet/config-custom.yaml`. Use the same style as the default `config.yaml` and change (or add) the desired setting.
 - Load the environment
 
 ```
@@ -42,19 +43,65 @@ $ vagrant up
 
 The last command will take a while to complete (the first time you run it), as it has to download the image, install it, run it, and install all of the included software.
 
+- Edit your `hosts` file:
+
+```
+$ sudo nano /etc/hosts
+```
+
+- Add the following to the bottom of your `hosts` file:
+
+```
+192.168.57.101	local.dev www.local.dev phpmyadmin.local.dev localvm.dev
+```
+
 ### Usage
 
+- Local editing:
+	- put your websites in subfolders of `~/Sites`.
+	- any local edits to files in that directory will quickly auto-sync to the VM.
+	- example: you might create `~/Sites/wordpress`. You can then access it at `http://local.dev/wordpress`.
+- Vagrant commands (must be run while in the `localvm` folder)
+	- `vagrant up` # start the VM
+	- `vagrant ssh` # ssh into the VM
+	- `vagrant suspend` # suspend the VM
+	- `vagrant halt` # shut down the VM
+	- `vagrant provision` # read the config.yaml file and apply any changes to the VM
 - Web server:
 	- `http://192.168.57.101`
+	- `http://local.dev`
 - MySQL server:
 	- mysql username: `root`, password: `123`
 	- extra mysql username: `dbuser`, password: `123`
-	- use SSH tunnel to `192.168.57.101` with username `vagrant` and ssh-key `Vagrant/localvm/puphpet/files/dot/ssh/id_rsa`
+	- Sequel Pro or MySQL Workbench: use SSH tunnel to SSH Host `192.168.57.101` with username `vagrant` and ssh-key `Vagrant/localvm/puphpet/files/dot/ssh/id_rsa`. MySQL Host `127.0.0.1` with username `root` and password `123`. 
+- PHPMyAdmin
+	- `http://phpmyadmin.local.dev` (requires a little additional setup, see below)
 
 ### Nice Stuff
 
-Configure phpmyadmin:
+#### Configure PHPMyAdmin:
+
+I recommend using a dedicated database tool, like MySQL Workbench or Sequel Pro. The VM does come with PHPMyAdmin, but it requires some additional steps to be fully functional. Run the command below, choose Apache (with spacebar), enter `123` for the root password, and then let it run the database setup necessary to function properly.
 
 ```
-/usr/sbin/pma-configure
+sudo /usr/sbin/pma-configure
 ```
+
+#### Install a nice GUI
+
+There is a free menubar app called [Vagrant Manager](http://vagrantmanager.com/) that will help you manage this dev environment. If you prefer that over the command line, install it from the link.
+
+### Updating
+
+*First a note:* Try not to make any manual changes to Linux inside your VM. Doing so removes the ability to reusably recreate it should the need arise. Keeping all of your customizations centralized in the `config.yaml` file is the best practice. Better yet, submit any customizations as a pull request to this repository, so everyone on the team can benefit.
+
+To update to the latest version (from the localvm folder):
+
+```
+$ git pull
+$ vagrant up # if not already running
+$ vagrant provision
+```
+
+Happy developing!
+
