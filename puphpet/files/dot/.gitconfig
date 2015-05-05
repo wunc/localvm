@@ -1,0 +1,10 @@
+[core]
+	editor = vi
+	abbrev = 8
+[push]
+	default = simple
+[log]
+	abbrevCommit = yes
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	ignored = ls-files --others --ignored --exclude-standard --directory
