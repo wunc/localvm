@@ -77,7 +77,7 @@ $ sudo nano /etc/hosts
 - PHPMyAdmin
 	- `http://phpmyadmin.local.dev` (requires a little additional setup, see below)
 
-### Nice Stuff
+### Optional Nice Stuff
 
 #### Configure PHPMyAdmin:
 

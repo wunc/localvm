@@ -175,7 +175,7 @@ set noswapfile
 "set expandtab
 
 " Be smart when using tabs ;)
-set smarttab
+"set smarttab
 
 " 1 tab == 4 spaces
 set shiftwidth=4

@@ -72,4 +72,8 @@ alias art='php artisan'
 # other
 alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
 
+# ssh-agent
+eval "$(ssh-agent -s)"
+ssh-add
+
 source /usr/local/rvm/scripts/rvm
