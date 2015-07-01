@@ -52,7 +52,10 @@ $ sudo nano /etc/hosts
 - Add the following to the bottom of your `hosts` file:
 
 ```
-192.168.57.101	local.dev www.local.dev phpmyadmin.local.dev localvm.dev
+192.168.57.101	local.dev
+192.168.57.101  www.local.dev
+192.168.57.101  phpmyadmin.local.dev
+192.168.57.101  localvm.dev
 ```
 
 ### Usage
