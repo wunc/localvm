@@ -147,6 +147,7 @@ apache:
     modules:
         - proxy_fcgi
         - rewrite
+        - status
     vhosts:
         localdev:
             servername: local.dev
@@ -360,7 +361,7 @@ mailcatcher:
         http_ip: 0.0.0.0
         http_port: '1080'
         mailcatcher_path: /usr/local/rvm/wrappers/default
-        from_email_method: inline
+        from_email_method: headers
 beanstalkd:
     install: '0'
     settings:
