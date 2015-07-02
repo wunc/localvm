@@ -66,9 +66,10 @@ $ sudo nano /etc/hosts
 	- example: you might create `~/Sites/wordpress`. You can then access it at `http://local.dev/wordpress`.
 - Vagrant commands (must be run while in the `localvm` folder)
 	- `vagrant up` # start the VM
+	- `vagrant halt` # shut down the VM
 	- `vagrant ssh` # ssh into the VM
 	- `vagrant suspend` # suspend the VM
-	- `vagrant halt` # shut down the VM
+	- `vagrant resume` # resume a suspended VM
 	- `vagrant provision` # read the config.yaml file and apply any changes to the VM
 - Web server:
 	- `http://192.168.57.101`
