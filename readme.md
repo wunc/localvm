@@ -85,7 +85,7 @@ $ sudo nano /etc/hosts
 
 #### Configure PHPMyAdmin:
 
-I recommend using a dedicated database tool, like MySQL Workbench or Sequel Pro. The VM does come with PHPMyAdmin, but it requires some additional steps to be fully functional. Run the command below, choose Apache (with spacebar), enter `123` for the root password, and then let it run the database setup necessary to function properly.
+I recommend using a dedicated database tool, like MySQL Workbench or Sequel Pro. The VM does come with PHPMyAdmin, but it requires some additional steps to be fully functional. Run the command below, choose Apache (with spacebar), enter `123` for the root password, and then let it run the database setup necessary to function properly. In the VM type:
 
 ```
 sudo /usr/sbin/pma-configure
@@ -94,6 +94,16 @@ sudo /usr/sbin/pma-configure
 #### Install a nice GUI
 
 There is a free menubar app called [Vagrant Manager](http://vagrantmanager.com/) that will help you manage this dev environment. If you prefer that over the command line, install it from the link.
+
+#### Auto-update /etc/hosts
+
+The plugin [Vagrant Host Manager](https://github.com/smdahlen/vagrant-hostmanager) will automatically update the host machine's `/etc/hosts` file with the defined Apache vhosts in the guest VM. Nice! In you host machine type:
+
+```
+vagrant plugin install vagrant-hostmanager
+```
+
+*Important:* There is a [bug](https://github.com/smdahlen/vagrant-hostmanager/issues/80) in vagrant-hostmanager version 1.5.0 that messes up DNS on certain Mac OSX versions. If you want to use this plugin on OSX, [install the development version](https://github.com/smdahlen/vagrant-hostmanager#installing-development-version) until a new version is released.
 
 ### Updating
 
