@@ -80,6 +80,9 @@ $ sudo nano /etc/hosts
 	- Sequel Pro or MySQL Workbench: use SSH tunnel to SSH Host `192.168.57.101` with username `vagrant` and ssh-key `Vagrant/localvm/puphpet/files/dot/ssh/id_rsa`. MySQL Host `127.0.0.1` with username `root` and password `123`. 
 - PHPMyAdmin
 	- `http://phpmyadmin.local.dev` (requires a little additional setup, see below)
+- Mailcatcher
+	- `http://192.168.57.101:1080`
+	- `http://local.dev:1080`
 
 ### Optional Nice Stuff
 
