@@ -289,8 +289,7 @@ ruby:
                 - highline
 python:
     install: '1'
-    packages:
-        - thefuck
+    packages: {  }
     versions: {  }
 nodejs:
     install: '1'

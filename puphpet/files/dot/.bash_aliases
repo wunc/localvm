@@ -41,8 +41,6 @@ bold=$(tput -Txterm bold)
 reset=$(tput -Txterm sgr0)
 
 # Nicely formatted terminal prompt
-# export PS1='\n\[$bold\]\[$black\][\[$dk_blue\]\@\[$black\]]-[\[$green\]\u\[$yellow\]@\[$green\]\h\[$black\]]-[\[$pink\]\w\[$black\]]\[\033[0;33m\]$(__vcs_name) \[\033[00m\]\[$reset\]\n\[$reset\]\$ '
-
 export PS1='\[$bold\]\[$dk_blue\]\@ \[$green\]\u\[$yellow\]@\[$green\]\h\[$pink\][\w]$(__vcs_name)\[$reset\]\[$reset\]\$ '
 
 # filesystem
@@ -68,9 +66,6 @@ alias glb='gl master..'
 
 # laravel
 alias art='php artisan'
-
-# other
-alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
 
 # ssh-agent
 eval "$(ssh-agent -s)"
