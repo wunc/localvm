@@ -67,8 +67,4 @@ alias glb='gl master..'
 # laravel
 alias art='php artisan'
 
-# ssh-agent
-#eval "$(ssh-agent -s)"
-#ssh-add
-
 source /usr/local/rvm/scripts/rvm

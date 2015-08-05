@@ -108,6 +108,10 @@ vagrant plugin install vagrant-hostmanager
 
 *Important:* There is a [bug](https://github.com/smdahlen/vagrant-hostmanager/issues/80) in vagrant-hostmanager version 1.5.0 that messes up DNS on certain Mac OSX versions. If you want to use this plugin on OSX, [install the development version](https://github.com/smdahlen/vagrant-hostmanager#installing-development-version) until a new version is released.
 
+#### SSH-Agent forwarding
+
+The environment is configured to forward your host computer's SSH keys into the VM, so that you can, for example, commit to Github or do Capistrano deployments from within the VM. You need to have your host computer configured properly for this to work, however.  To do so, use [Github's guide to using SSH agent forwarding](https://developer.github.com/guides/using-ssh-agent-forwarding/).
+
 ### Updating
 
 *First a note:* Try not to make any manual changes to Linux inside your VM. Doing so removes the ability to reusably recreate it should the need arise. Keeping all of your customizations centralized in the `config.yaml` file is the best practice. Better yet, submit any customizations as a pull request to this repository, so everyone on the team can benefit.
