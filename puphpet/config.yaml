@@ -61,7 +61,7 @@ vagrantfile:
         username: vagrant
         guest_port: null
         keep_alive: true
-        forward_agent: false
+        forward_agent: true
         forward_x11: false
         shell: 'bash -l'
     vagrant:
@@ -222,8 +222,7 @@ php:
             - xmlrpc
             - xsl
         pear: {  }
-        pecl:
-            - pecl_http
+        pecl: {  }
     ini:
         display_errors: On
         error_reporting: '-1'

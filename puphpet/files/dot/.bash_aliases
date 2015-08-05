@@ -68,7 +68,7 @@ alias glb='gl master..'
 alias art='php artisan'
 
 # ssh-agent
-eval "$(ssh-agent -s)"
-ssh-add
+#eval "$(ssh-agent -s)"
+#ssh-add
 
 source /usr/local/rvm/scripts/rvm
