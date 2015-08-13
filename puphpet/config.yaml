@@ -295,6 +295,8 @@ nodejs:
     npm_packages:
         - bower
         - gulp
+        - gulp-ruby-sass
+        - gulp-sourcemaps
 hhvm:
     install: '0'
     nightly: 0
