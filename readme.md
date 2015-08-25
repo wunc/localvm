@@ -99,7 +99,7 @@ sudo /usr/sbin/pma-configure
 If your system timezone is incorrect, run the following command to set it
 
 ```
-sudo dpkg-reconfigure tzdata
+timedatectl set-timezone America/Chicago
 ```
 
 #### Install a nice GUI
