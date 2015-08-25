@@ -94,6 +94,14 @@ I recommend using a dedicated database tool, like MySQL Workbench or Sequel Pro.
 sudo /usr/sbin/pma-configure
 ```
 
+#### Set the VM system timezone
+
+If your system timezone is incorrect, run the following command to set it
+
+```
+sudo dpkg-reconfigure tzdata
+```
+
 #### Install a nice GUI
 
 There is a free menubar app called [Vagrant Manager](http://vagrantmanager.com/) that will help you manage this dev environment. If you prefer that over the command line, install it from the link.
