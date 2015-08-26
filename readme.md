@@ -92,6 +92,8 @@ I recommend using a dedicated database tool, like MySQL Workbench or Sequel Pro.
 
 ```
 sudo /usr/sbin/pma-configure
+sudo dpkg-reconfigure -plow phpmyadmin
+sudo /usr/sbin/pma-secure
 ```
 
 #### Set the VM system timezone
