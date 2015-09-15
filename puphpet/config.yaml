@@ -228,6 +228,7 @@ php:
         error_reporting: '-1'
         session.save_path: /var/lib/php/session
         date.timezone: America/Chicago
+        max_input_vars: 10000
     fpm_ini:
         error_log: /var/log/php-fpm.log
     fpm_pools:
