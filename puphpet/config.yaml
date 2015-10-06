@@ -276,7 +276,7 @@ ruby:
     install: '1'
     versions:
         rv_uxtw6okyf5q2:
-            version: 1.9.3
+            version: 2.2.3
             gems:
                 - capistrano
                 - sass
