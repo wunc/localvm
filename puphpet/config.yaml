@@ -229,6 +229,8 @@ php:
         session.save_path: /var/lib/php/session
         date.timezone: America/Chicago
         max_input_vars: 10000
+        upload_max_filesize: 32M
+        post_max_size: 32M
     fpm_ini:
         error_log: /var/log/php-fpm.log
     fpm_pools:
