@@ -66,5 +66,6 @@ alias glb='gl master..'
 
 # laravel
 alias art='php artisan'
+DISABLE_NOTIFIER=true
 
 source /usr/local/rvm/scripts/rvm
