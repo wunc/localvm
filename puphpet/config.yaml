@@ -74,6 +74,7 @@ server:
         - git
         - phpmyadmin
         - python-dev
+        - libgmp-dev
 users_groups:
     install: '1'
     groups: {  }
@@ -290,6 +291,7 @@ ruby:
                 - capistrano-bower
                 - capistrano-gulp
                 - highline
+                - mailcatcher
 python:
     install: '1'
     packages: {  }
