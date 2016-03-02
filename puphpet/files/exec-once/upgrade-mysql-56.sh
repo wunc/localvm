@@ -6,7 +6,7 @@
 echo '--> Attempting to upgrade MySQL to v5.6.'
 debconf-set-selections <<< 'mysql-server-5.6 mysql-server/root_password password 123'
 debconf-set-selections <<< 'mysql-server-5.6 mysql-server/root_password_again password 123'
-apt-get -y install mysql-server-5.6
+apt-get -y install mysql-server-5.6 mysql-client-5.6 mysql-client-core-5.6
 echo '--> Upgrade to MySQL v5.6 finished.'
 
 echo '--> Attempting to remove unused or unneeded packages.'
