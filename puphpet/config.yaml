@@ -245,7 +245,7 @@ php:
     composer: '1'
     composer_home: ''
 xdebug:
-    install: '1'
+    install: '0'
     settings:
         xdebug.default_enable: '1'
         xdebug.remote_autostart: '0'
@@ -270,7 +270,7 @@ blackfire:
 xhprof:
     install: '0'
 wpcli:
-    install: '1'
+    install: '0'
     version: v0.17.1
 drush:
     install: '0'
