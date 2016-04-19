@@ -86,6 +86,26 @@ $ sudo nano /etc/hosts
 
 ### Optional Nice Stuff
 
+#### Passwordless Vagrant Up
+
+There are two components that require "sudo" passwords in this vagrant setup: [NFS](https://www.vagrantup.com/docs/synced-folders/nfs.html) and [Vagrant Host Manager](https://github.com/devopsgroup-io/vagrant-hostmanager). They will often prompt you for your password whenever you do a `vagrant up`. To bypass this, edit the sodoers file:
+
+```
+sudo visudo
+```
+
+and add the following lines (these are OS X specific, replace `<username>` with your home folder name):
+
+```ini
+Cmnd_Alias VAGRANT_HOSTMANAGER_UPDATE = /bin/cp /Users/<username>/.vagrant.d/tmp/hosts.local /etc/hosts
+Cmnd_Alias VAGRANT_EXPORTS_ADD = /usr/bin/tee -a /etc/exports
+Cmnd_Alias VAGRANT_NFSD = /sbin/nfsd restart
+Cmnd_Alias VAGRANT_EXPORTS_REMOVE = /usr/bin/sed -E -e * d -ibak /etc/exports
+%admin ALL=(root) NOPASSWD: VAGRANT_EXPORTS_ADD, VAGRANT_NFSD, VAGRANT_EXPORTS_REMOVE, VAGRANT_HOSTMANAGER_UPDATE
+```
+
+You can change %admin to your own username or `%staff` if you are not a local admin.
+
 #### Configure PHPMyAdmin:
 
 I recommend using a dedicated database tool, like MySQL Workbench or Sequel Pro. The VM does come with PHPMyAdmin, but it requires some additional steps to be fully functional. Run the command below, choose Apache (with spacebar), enter `123` for the root password, and then let it run the database setup necessary to function properly. In the VM type:
