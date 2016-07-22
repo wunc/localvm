@@ -1,5 +1,3 @@
-set rtp+=$GOROOT/misc/vim
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer:
 "       Amir Salihefendic
@@ -127,6 +125,9 @@ set novisualbell
 set t_vb=
 set tm=500
 
+" Add a bit extra margin to the left
+set foldcolumn=1
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -169,10 +170,10 @@ set noswapfile
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
-"set expandtab
+set expandtab
 
 " Be smart when using tabs ;)
-"set smarttab
+set smarttab
 
 " 1 tab == 4 spaces
 set shiftwidth=4
@@ -182,9 +183,9 @@ set tabstop=4
 set lbr
 set tw=500
 
-"set ai "Auto indent
-"set si "Smart indent
-"set wrap "Wrap lines
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
 
 
 """"""""""""""""""""""""""""""

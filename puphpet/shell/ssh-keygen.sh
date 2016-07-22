@@ -31,7 +31,8 @@ function create_key()
 create_key 'root_id_rsa'
 create_key 'id_rsa'
 
-ROOT_PUBLIC_SSH_KEY=$(cat "${VAGRANT_CORE_FOLDER}/files/dot/ssh/id_rsa.pub")
+ROOT_PUBLIC_SSH_KEY=$(cat "${VAGRANT_CORE_FOLDER}/files/dot/ssh/root_id_rsa.pub")
+PUBLIC_SSH_KEY=$(cat "${VAGRANT_CORE_FOLDER}/files/dot/ssh/id_rsa.pub")
 
 echo 'Adding generated root key to /root/.ssh/id_rsa'
 echo 'Adding generated root key to /root/.ssh/id_rsa.pub'
