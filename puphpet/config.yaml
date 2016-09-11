@@ -263,6 +263,14 @@ ruby:
                 - activesupport@4.2.6
                 - vine@0.2
                 - sass
+                - capistrano
+                - capistrano-bundler
+                - capistrano-composer
+                - capistrano-laravel
+                - capistrano-npm
+                - capistrano-bower
+                - capistrano-gulp
+                - highline
 python:
     install: '1'
     packages: {  }
@@ -275,6 +283,7 @@ nodejs:
         - bower
         - gulp
         - gulp-sass
+        - gulp-ruby-sass
         - gulp-sourcemaps
         - gulp-uglify
         - gulp-autoprefixer
