@@ -84,12 +84,23 @@ class puphpet::mysql::repo(
           originator => 'repo.mysql.com-apt',
         }
 
+        if ! defined(Package['debian-keyring']) {
+          package { 'debian-keyring':
+            ensure => present
+          }
+        }
+
+        if ! defined(Package['debian-archive-keyring']) {
+          package { 'debian-archive-keyring':
+            ensure => present
+          }
+        }
+
         if ! defined(Apt::Source['repo.mysql.com-apt']) {
           apt::source { 'repo.mysql.com-apt':
             location          => "http://repo.mysql.com/apt/${os}",
             release           => $::lsbdistcodename,
             repos             => 'mysql-5.7',
-            required_packages => 'debian-keyring debian-archive-keyring',
             include           => { 'src' => true },
             require           => Apt::Pin['repo.mysql.com-apt'],
           }
