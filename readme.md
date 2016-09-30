@@ -109,7 +109,6 @@ brew install dnsmasq
 mkdir -pv $(brew --prefix)/etc/
 echo 'address=/.dev/192.168.57.101' > $(brew --prefix)/etc/dnsmasq.conf
 echo 'listen-address=127.0.0.1' >> $(brew --prefix)/etc/dnsmasq.conf
-echo 'port=35353' >> $(brew --prefix)/etc/dnsmasq.conf
 # Add dnsmasq to the list of DNS resolvers
 sudo mkdir -v /etc/resolver
 sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/dev'
