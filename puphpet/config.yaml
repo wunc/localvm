@@ -23,7 +23,7 @@ vagrantfile:
                         id: localvm
                         hostname: local.dev
                         network:
-                            private_network: 192.168.56.101
+                            private_network: 192.168.57.101
                             forwarded_port:
                                 vflmnfp_8k1t127b7has:
                                     host: '9787'
@@ -170,7 +170,7 @@ apache:
                     files_match:
                         avdfm_f9kkbza7ycy9:
                             path: \.php$
-                            sethandler: 'proxy:fcgi://127.0.0.1:9000'
+                            sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
                             custom_fragment: ''
                             provider: filesmatch
                     provider: directory
@@ -208,7 +208,7 @@ apache:
                     files_match:
                         avdfm_f9kkbza7ybx8:
                             path: \.php$
-                            sethandler: 'proxy:fcgi://127.0.0.1:9000'
+                            sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
                             custom_fragment: ''
                             provider: filesmatch
                     provider: directory
@@ -246,7 +246,7 @@ apache:
                     files_match:
                         avdfm_f9kkbza7ybw7:
                             path: \.php$
-                            sethandler: 'proxy:fcgi://127.0.0.1:9000'
+                            sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
                             custom_fragment: ''
                             provider: filesmatch
                     provider: directory
@@ -290,7 +290,7 @@ php:
         phpfp_iptnfrowb2np:
             ini:
                 prefix: www
-                listen: '127.0.0.1:9000'
+                listen: '/var/run/php5-fpm.sock'
                 security.limit_extensions: .php
                 user: www-user
                 group: www-data
