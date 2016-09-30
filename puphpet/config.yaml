@@ -333,7 +333,7 @@ ruby:
         rv_j9wfat123e2y:
             default: '1'
             bundler: '1'
-            version: 2.2.3
+            version: 2.3.0
             gems:
                 - deep_merge@1.0.1
                 - activesupport@4.2.6
@@ -394,7 +394,7 @@ mysql:
         version: '5.7'
         root_password: '123'
         override_options: {  }
-    adminer: 0
+    adminer: '1'
     users: {  }
     databases: {  }
     grants: {  }
