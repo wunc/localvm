@@ -136,7 +136,7 @@ apache:
         - vhost_alias
         - deflate
     vhosts:
-        997_laravel_local_dev:
+        zzzw_laravel_local_dev:
             servername: lvl.local.dev
             serveraliases:
                 - 'www.lvl.local.dev'
@@ -174,7 +174,7 @@ apache:
                             custom_fragment: ''
                             provider: filesmatch
                     provider: directory
-        998_wordpress_local_dev:
+        zzzx_wordpress_local_dev:
             servername: wp.local.dev
             serveraliases:
                 - 'www.wp.local.dev'
@@ -212,18 +212,17 @@ apache:
                             custom_fragment: ''
                             provider: filesmatch
                     provider: directory
-        999_local_dev:
+        zzzy_local_dev:
             servername: local.dev
             serveraliases:
                 - 'www.local.dev'
-                - '*.dev'
             docroot: /var/www
             port: '80'
             setenv:
                 - 'APP_ENV dev'
             setenvif:
                 - 'Authorization "(.*)" HTTP_AUTHORIZATION=$1'
-            custom_fragment: '/vagrant/puphpet/local.dev-custom.conf'
+            custom_fragment: '/vagrant/puphpet/non-virtualdocumentroot.conf'
             ssl: '0'
             ssl_cert: ''
             ssl_key: ''
@@ -245,6 +244,43 @@ apache:
                     custom_fragment: ''
                     files_match:
                         avdfm_f9kkbza7ybw7:
+                            path: \.php$
+                            sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
+                            custom_fragment: ''
+                            provider: filesmatch
+                    provider: directory
+        zzzz_wildcard_dev:
+            servername: wildcard.dev
+            serveraliases:
+                - '*.dev'
+            docroot: /var/www
+            port: '80'
+            setenv:
+                - 'APP_ENV dev'
+            setenvif:
+                - 'Authorization "(.*)" HTTP_AUTHORIZATION=$1'
+            custom_fragment: '/vagrant/puphpet/local.dev-custom.conf'
+            ssl: '0'
+            ssl_cert: ''
+            ssl_key: ''
+            ssl_chain: ''
+            ssl_certs_dir: ''
+            ssl_protocol: ''
+            ssl_cipher: ''
+            directories:
+                zzz_k0brl262dbma:
+                    path: /var/www
+                    options:
+                        - Indexes
+                        - FollowSymlinks
+                        - MultiViews
+                    allow_override:
+                        - All
+                    require:
+                        - 'all granted'
+                    custom_fragment: ''
+                    files_match:
+                        zzzfm_f9kkbza7ybw7:
                             path: \.php$
                             sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
                             custom_fragment: ''
