@@ -25,10 +25,10 @@ This project provides a solution: a virtual machine that provides a common pre-c
 - Put any websites that you want hosted into `~/Sites`. These will automatically be mapped to `/var/www` in the VM (using 2-way NFS)
 - Install the environment
 
-```
-$ mkdir Vagrant
-$ cd Vagrant
-$ git clone git@github.com:wunc/localvm.git localvm
+```bash
+mkdir Vagrant
+cd Vagrant
+git clone git@github.com:wunc/localvm.git localvm
 ```
 
 - Configure as needed
@@ -36,17 +36,17 @@ $ git clone git@github.com:wunc/localvm.git localvm
 	- *customize your environment:* If you want to change any dot-files, they are located in `puphpet/files/dot`; edit them prior to starting the vm and they will be copied over to the vm on boot. If you want to override any of the default settings, create a file called `puphpet/config-custom.yaml`. Use the same style as the default `config.yaml` and change (or add) the desired setting.
 - Load the environment
 
-```
-$ cd localvm
-$ vagrant up
+```bash
+cd localvm
+vagrant up
 ```
 
 The last command will take a while to complete (the first time you run it), as it has to download the image, install it, run it, and install all of the included software.
 
 - Edit your `hosts` file:
 
-```
-$ sudo nano /etc/hosts
+```bash
+sudo nano /etc/hosts
 ```
 
 - Add the following to the bottom of your `hosts` file:
@@ -54,9 +54,10 @@ $ sudo nano /etc/hosts
 ```
 192.168.57.101	local.dev
 192.168.57.101  www.local.dev
-192.168.57.101  phpmyadmin.local.dev
 192.168.57.101  localvm.dev
 ```
+
+along with any other dev domains that you would like to set up
 
 ### Usage
 
@@ -72,25 +73,57 @@ $ sudo nano /etc/hosts
 	- `vagrant resume` # resume a suspended VM
 	- `vagrant provision` # read the config.yaml file and apply any changes to the VM
 - Web server:
-	- `http://192.168.57.101`
-	- `http://local.dev`
+	- [http://192.168.57.101](http://192.168.57.101)
+	- [http://local.dev](http://local.dev)
 - MySQL server:
 	- mysql username: `root`, password: `123`
 	- extra mysql username: `dbuser`, password: `123`
 	- Sequel Pro or MySQL Workbench: use SSH tunnel to SSH Host `192.168.57.101` with username `vagrant` and ssh-key `Vagrant/localvm/puphpet/files/dot/ssh/id_rsa`. MySQL Host `127.0.0.1` with username `root` and password `123`. 
-- PHPMyAdmin
-	- `http://phpmyadmin.local.dev` (requires a little additional setup, see below)
-- Mailcatcher
-	- `http://192.168.57.101:1080`
-	- `http://local.dev:1080`
+- Adminer (replaces PHPMyAdmin; see [below](#adminer))
+	- [http://local.dev/html/adminer](http://local.dev/html/adminer)
+- MailHog (replaces Mailcatcher)
+	- [http://192.168.57.101:8025](http://192.168.57.101:8025)
+	- [http://local.dev:8025](http://local.dev:8025)
 
 ### Optional Nice Stuff
+
+#### Dynamic Virtualhosts
+
+The Apache web server is configured to accept certain virtual hostname patterns and properly set the VirtualDocumentRoot for them. This way, you don't have to edit the `config-custom.yaml` and re-provision the VM every time you want to add a new vhost.
+
+- Bedrock-style WordPress
+	- `*.wp.dev` uses `/var/www/*/web` (~/Sites/*/web on your computer) as its DocumentRoot
+- Laravel
+	- `*.lvl.dev` uses `/var/www/*/public` (~/Sites/*/web on your computer) as its DocumentRoot
+- General
+	- `*.dev` uses `/var/www/*` (`~/Sites/*` on your computer) as its DocumentRoot
+
+In order for this to work, your computer must have it's DNS set up to also dynamically point to the Vagrant VM. For Macs, you can install dnsmasq via Homebrew:
+
+```bash
+# Update Homebrew
+brew update
+# Install dnsmasq
+brew install dnsmasq
+# Create the dnsmasq.conf file
+mkdir -pv $(brew --prefix)/etc/
+echo 'address=/.dev/192.168.57.101' > $(brew --prefix)/etc/dnsmasq.conf
+echo 'listen-address=127.0.0.1' >> $(brew --prefix)/etc/dnsmasq.conf
+echo 'port=35353' >> $(brew --prefix)/etc/dnsmasq.conf
+# Add dnsmasq to the list of DNS resolvers
+sudo mkdir -v /etc/resolver
+sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/dev'
+# Start the dnsmasq service
+sudo brew services start dnsmasq
+```
+
+After installation, you will probably have to reboot for it to take effect.
 
 #### Passwordless Vagrant Up
 
 There are two components that require "sudo" passwords in this vagrant setup: [NFS](https://www.vagrantup.com/docs/synced-folders/nfs.html) and [Vagrant Host Manager](https://github.com/devopsgroup-io/vagrant-hostmanager). They will often prompt you for your password whenever you do a `vagrant up`. To bypass this, edit the sodoers file:
 
-```
+```bash
 sudo visudo
 ```
 
@@ -106,21 +139,15 @@ Cmnd_Alias VAGRANT_EXPORTS_REMOVE = /usr/bin/sed -E -e * d -ibak /etc/exports
 
 You can change %admin to your own username or `%staff` if you are not a local admin.
 
-#### Configure PHPMyAdmin:
+#### Adminer:
 
-I recommend using a dedicated database tool, like MySQL Workbench or Sequel Pro. The VM does come with PHPMyAdmin, but it requires some additional steps to be fully functional. Run the command below, choose Apache (with spacebar), enter `123` for the root password, and then let it run the database setup necessary to function properly. In the VM type:
-
-```
-sudo /usr/sbin/pma-configure
-sudo dpkg-reconfigure -plow phpmyadmin
-sudo /usr/sbin/pma-secure
-```
+I recommend using a dedicated database tool, like [MySQL Workbench](http://www.mysql.com/products/workbench/) or [Sequel Pro](https://www.sequelpro.com/). The VM does come with Adminer, but it may be overwritten if you are upgrading from a previous version. Adminer is a single PHP file, and therefore is very easy to re-install: just [download it](https://www.adminer.org/) (I recommend the English-only MySQL version), save it as `~/Sites/adminer/index.php`. Then, you should be able to access it at `http://local.dev/adminer`.
 
 #### Set the VM system timezone
 
 If your system timezone is incorrect, run the following command to set it
 
-```
+```bash
 timedatectl set-timezone America/Chicago
 ```
 
@@ -132,15 +159,15 @@ There is a free menubar app called [Vagrant Manager](http://vagrantmanager.com/)
 
 The plugin [Vagrant Host Manager](https://github.com/smdahlen/vagrant-hostmanager) will automatically update the host machine's `/etc/hosts` file with the defined Apache vhosts in the guest VM. Nice! In you host machine type:
 
-```
+```bash
 vagrant plugin install vagrant-hostmanager
 ```
-
-*Important:* There is a [bug](https://github.com/smdahlen/vagrant-hostmanager/issues/80) in vagrant-hostmanager version 1.5.0 that messes up DNS on certain Mac OSX versions. If you want to use this plugin on OSX, [install the development version](https://github.com/smdahlen/vagrant-hostmanager#installing-development-version) until a new version is released.
 
 #### SSH-Agent forwarding
 
 The environment is configured to forward your host computer's SSH keys into the VM, so that you can, for example, commit to Github or do Capistrano deployments from within the VM. You need to have your host computer configured properly for this to work, however.  To do so, use [Github's guide to using SSH agent forwarding](https://developer.github.com/guides/using-ssh-agent-forwarding/).
+
+Note: on macOS 10.12 (Sierra), saved ssh keys are not automatically reloaded into the agent upon reboot. A fix is available [here](https://github.com/jirsbek/SSH-keys-in-macOS-Sierra-keychain).
 
 ### Updating
 
@@ -148,10 +175,19 @@ The environment is configured to forward your host computer's SSH keys into the 
 
 To update to the latest version (from the localvm folder):
 
+```bash
+git pull
+vagrant up # if not already running
+vagrant provision
 ```
-$ git pull
-$ vagrant up # if not already running
-$ vagrant provision
+
+#### Upgrading from version 1.0
+
+```bash
+# first backup any databases that you would like to keep!
+vagrant destroy # destroy the old VM
+git pull # get the latest version
+vagrant up # this should also provision because it's a new VM
 ```
 
 Happy developing!
