@@ -88,6 +88,9 @@ server:
     packages:
         - vim
         - htop
+        - libxrender1
+        - libfontconfig1
+        - libxext6
 users_groups:
     install: '1'
     groups: {  }
