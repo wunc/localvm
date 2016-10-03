@@ -310,6 +310,7 @@ php:
             - sqlite
             - xmlrpc
             - xsl
+            - zip
         pear: {  }
         pecl: {  }
     ini:
