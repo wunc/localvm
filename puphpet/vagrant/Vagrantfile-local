@@ -138,11 +138,6 @@ machines.each do |i, machine|
       end
     end
 
-    # https://github.com/fgrehm/vagrant-cachier
-    if Vagrant.has_plugin?('vagrant-cachier')
-      machine_id.cache.scope = :box
-    end
-
     data['vm']['synced_folder'].each do |i, folder|
       if folder['source'] != '' && folder['target'] != ''
         sync_owner = !folder['owner'].nil? ? folder['owner'] : 'www-data'
@@ -316,7 +311,7 @@ machines.each do |i, machine|
           skipKeys = [
             'memsize',
             'cpus',
-            'use_linked_clone',
+            'linked_clone',
             'check_guest_tools',
             'update_guest_tools'
           ]
@@ -328,9 +323,9 @@ machines.each do |i, machine|
           v.customize ['set', :id, "--#{key}", "#{value}"]
         end
 
-        if !provider['virtualizers']['parallels']['use_linked_clone'].nil? &&
-          provider['virtualizers']['parallels']['use_linked_clone'].to_i == 1
-          v.use_linked_clone = true
+        if !provider['virtualizers']['parallels']['linked_clone'].nil? &&
+          provider['virtualizers']['parallels']['linked_clone'].to_i == 1
+          v.linked_clone = true
         end
 
         if !provider['virtualizers']['parallels']['check_guest_tools'].nil? &&
@@ -370,9 +365,6 @@ machines.each do |i, machine|
       s.args = "#{ssh_username}"
     end
     machine_id.vm.provision 'shell' do |s|
-      s.path = 'puphpet/shell/check-puppet-modules.sh'
-    end
-    machine_id.vm.provision 'shell' do |s|
       s.path = 'puphpet/shell/install-puppet.sh'
     end
     machine_id.vm.provision :shell do |s|
@@ -388,7 +380,7 @@ machines.each do |i, machine|
       }
       puppet.manifests_path = "#{data['vm']['provision']['puppet']['manifests_path']}"
       puppet.manifest_file  = ""
-      puppet.module_path    = "#{data['vm']['provision']['puppet']['module_path']}"
+      puppet.module_path    = data['vm']['provision']['puppet']['module_path']
 
       if !data['vm']['provision']['puppet']['options'].empty?
         puppet.options = data['vm']['provision']['puppet']['options']

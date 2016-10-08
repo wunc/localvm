@@ -3,8 +3,8 @@ vagrantfile:
     vm:
         provider:
             local:
-                box: puphpet/ubuntu1404-x64
-                box_url: puphpet/ubuntu1404-x64
+                box: puphpet/ubuntu1604-x64
+                box_url: puphpet/ubuntu1604-x64
                 box_version: '0'
                 chosen_virtualizer: vmware_fusion
                 virtualizers:
@@ -15,7 +15,7 @@ vagrantfile:
                     vmware:
                         numvcpus: 1
                     parallels:
-                        use_linked_clone: 0
+                        linked_clone: 0
                         check_guest_tools: 0
                         update_guest_tools: 0
                 machines:
@@ -33,7 +33,9 @@ vagrantfile:
         provision:
             puppet:
                 manifests_path: puphpet/puppet/manifests
-                module_path: puphpet/puppet/modules
+                module_path:
+                    - puphpet/puppet/modules
+                    - puphpet/puppet/manifests
                 options:
                     - '--verbose'
                     - '--hiera_config /vagrant/puphpet/puppet/hiera.yaml'
@@ -111,6 +113,7 @@ cron:
 nginx:
     install: '0'
     settings:
+        version: present
         default_vhost: 1
         proxy_buffer_size: 128k
         proxy_buffers: '4 256k'
@@ -142,7 +145,6 @@ apache:
         zzzw_laravel_local_dev:
             servername: lvl.local.dev
             serveraliases:
-                - 'www.lvl.local.dev'
                 - '*.lvl.dev'
             docroot: /var/www
             port: '80'
@@ -150,7 +152,7 @@ apache:
                 - 'APP_ENV dev'
             setenvif:
                 - 'Authorization "(.*)" HTTP_AUTHORIZATION=$1'
-            custom_fragment: '/vagrant/puphpet/local.lvl.dev-custom.conf'
+            custom_fragment: /vagrant/puphpet/dev.lvl.conf
             ssl: '0'
             ssl_cert: ''
             ssl_key: ''
@@ -180,7 +182,6 @@ apache:
         zzzx_wordpress_local_dev:
             servername: wp.local.dev
             serveraliases:
-                - 'www.wp.local.dev'
                 - '*.wp.dev'
             docroot: /var/www
             port: '80'
@@ -188,7 +189,7 @@ apache:
                 - 'APP_ENV dev'
             setenvif:
                 - 'Authorization "(.*)" HTTP_AUTHORIZATION=$1'
-            custom_fragment: '/vagrant/puphpet/local.wp.dev-custom.conf'
+            custom_fragment: /vagrant/puphpet/dev.wp.conf
             ssl: '0'
             ssl_cert: ''
             ssl_key: ''
@@ -217,15 +218,13 @@ apache:
                     provider: directory
         zzzy_local_dev:
             servername: local.dev
-            serveraliases:
-                - 'www.local.dev'
             docroot: /var/www
             port: '80'
             setenv:
                 - 'APP_ENV dev'
             setenvif:
                 - 'Authorization "(.*)" HTTP_AUTHORIZATION=$1'
-            custom_fragment: '/vagrant/puphpet/non-virtualdocumentroot.conf'
+            custom_fragment: /vagrant/puphpet/dev.local.conf
             ssl: '0'
             ssl_cert: ''
             ssl_key: ''
@@ -262,7 +261,7 @@ apache:
                 - 'APP_ENV dev'
             setenvif:
                 - 'Authorization "(.*)" HTTP_AUTHORIZATION=$1'
-            custom_fragment: '/vagrant/puphpet/local.dev-custom.conf'
+            custom_fragment: /vagrant/puphpet/dev.conf
             ssl: '0'
             ssl_cert: ''
             ssl_key: ''
@@ -297,7 +296,7 @@ letsencrypt:
 php:
     install: '1'
     settings:
-        version: '56'
+        version: '5.6'
     modules:
         php:
             - cli
@@ -311,6 +310,7 @@ php:
             - mysql
             - odbc
             - sqlite
+            - xml
             - xmlrpc
             - xsl
             - zip
@@ -363,7 +363,7 @@ xhprof:
     install: '0'
 wpcli:
     install: '0'
-    version: v0.21.1
+    version: v0.24.1
 drush:
     install: '0'
     version: 8.0.5
@@ -373,7 +373,7 @@ ruby:
         rv_j9wfat123e2y:
             default: '1'
             bundler: '1'
-            version: 2.3.0
+            version: 2.3.1
             gems:
                 - deep_merge@1.0.1
                 - activesupport@4.2.6
@@ -405,7 +405,6 @@ nodejs:
         - gulp-autoprefixer
 hhvm:
     install: '0'
-    nightly: 0
     composer: '1'
     composer_home: ''
     settings: {  }
@@ -443,7 +442,7 @@ postgresql:
     settings:
         global:
             encoding: UTF8
-            version: '9.4'
+            version: '9.6'
         server:
             postgres_password: '123'
     databases: {  }
@@ -456,7 +455,7 @@ mongodb:
         bind_ip: 127.0.0.1
         port: '27017'
     globals:
-        version: 2.6.11
+        version: '2.6'
     databases: {  }
 redis:
     install: '0'
@@ -503,6 +502,6 @@ elastic_search:
 solr:
     install: '0'
     settings:
-        version: 4.10.2
+        version: 5.5.2
         port: '8984'
 

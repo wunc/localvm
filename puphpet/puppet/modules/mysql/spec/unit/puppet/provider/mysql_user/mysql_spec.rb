@@ -200,10 +200,10 @@ usvn_user@localhost
   end
 
   describe 'self.mysqld_version' do
-    it 'queries mysql if unset' do
+    it 'uses the mysqld_version fact if unset' do
        provider.class.instance_variable_set(:@mysqld_version_string, nil)
-       provider.class.expects(:mysqld).with(['-V'])
-       expect(provider.mysqld_version).to be_nil
+       Facter.stubs(:value).with(:mysqld_version).returns('5.6.24')
+       expect(provider.mysqld_version).to eq '5.6.24'
     end
     it 'returns 5.7.6 for "mysqld  Ver 5.7.6 for Linux on x86_64 (MySQL Community Server (GPL))"' do
        provider.class.instance_variable_set(:@mysqld_version_string, 'mysqld  Ver 5.7.6 for Linux on x86_64 (MySQL Community Server (GPL))')
