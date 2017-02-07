@@ -28,7 +28,7 @@ vagrantfile:
                                 vflmnfp_8k1t127b7has:
                                     host: '9787'
                                     guest: '22'
-                        memory: '512'
+                        memory: '1024'
                         cpus: '1'
         provision:
             puppet:
@@ -296,7 +296,7 @@ letsencrypt:
 php:
     install: '1'
     settings:
-        version: '5.6'
+        version: '7.1'
     modules:
         php:
             - cli
@@ -433,7 +433,7 @@ mysql:
         version: '5.7'
         root_password: '123'
         override_options: {  }
-    adminer: '1'
+    adminer: '0'
     users: {  }
     databases: {  }
     grants: {  }
