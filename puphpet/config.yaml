@@ -93,6 +93,7 @@ server:
         - libxrender1
         - libfontconfig1
         - libxext6
+        - yarn
 users_groups:
     install: '1'
     groups: {  }
