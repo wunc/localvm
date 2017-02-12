@@ -80,7 +80,7 @@ mod 'puppetlabs/rabbitmq',
     :ref => '5.5.0'
 mod 'arioch/redis',
     :git => 'https://github.com/arioch/puppet-redis.git',
-    :ref => '1.2.3'
+    :ref => '1.2.4'
 mod 'maestrodev/rvm'
 mod 'example42/solr',
     :git => 'https://github.com/example42/puppet-solr.git',

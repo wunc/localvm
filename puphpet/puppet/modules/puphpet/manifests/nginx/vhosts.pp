@@ -80,6 +80,7 @@ define puphpet::nginx::vhosts (
       true    =>  $vhost['rewrites'],
       default =>  {}
     }
+
     $vhost_rewrites_append = deep_merge($vhost_cfg_append, {
       'rewrites'  => $rewrites
     })
@@ -122,7 +123,7 @@ define puphpet::nginx::vhosts (
       "${puphpet::nginx::params::webroot_location}/index.html"
 
     $default_vhost_source_file =
-      '/vagrant/puphpet/puppet/manifests/puphpet/files/webserver_landing.html'
+      "${puphpet::params::puphpet_manifest_dir}/files/webserver_landing.html"
 
     exec { "Set ${default_vhost_index_file} contents":
       command => "cat ${default_vhost_source_file} > ${default_vhost_index_file} && \
