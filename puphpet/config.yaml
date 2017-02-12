@@ -173,13 +173,12 @@ apache:
                     require:
                         - 'all granted'
                     custom_fragment: ''
-                    files_match:
-                        avdfm_f9kkbza7ycy9:
-                            path: \.php$
-                            sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
-                            custom_fragment: ''
-                            provider: filesmatch
-                    provider: directory
+            files_match:
+                avdfm_f9kkbza7ycy9:
+                    path: \.php$
+                    sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
+                    custom_fragment: ''
+                    provider: filesmatch
         zzzx_wordpress_local_dev:
             servername: wp.local.dev
             serveraliases:
@@ -210,13 +209,12 @@ apache:
                     require:
                         - 'all granted'
                     custom_fragment: ''
-                    files_match:
-                        avdfm_f9kkbza7ybx8:
-                            path: \.php$
-                            sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
-                            custom_fragment: ''
-                            provider: filesmatch
-                    provider: directory
+            files_match:
+                avdfm_f9kkbza7ybx8:
+                    path: \.php$
+                    sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
+                    custom_fragment: ''
+                    provider: filesmatch
         zzzy_local_dev:
             servername: local.dev
             docroot: /var/www
@@ -245,13 +243,12 @@ apache:
                     require:
                         - 'all granted'
                     custom_fragment: ''
-                    files_match:
-                        avdfm_f9kkbza7ybw7:
-                            path: \.php$
-                            sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
-                            custom_fragment: ''
-                            provider: filesmatch
-                    provider: directory
+            files_match:
+                avdfm_f9kkbza7ybw7:
+                    path: \.php$
+                    sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
+                    custom_fragment: ''
+                    provider: filesmatch
         zzzz_wildcard_dev:
             servername: wildcard.dev
             serveraliases:
@@ -282,13 +279,12 @@ apache:
                     require:
                         - 'all granted'
                     custom_fragment: ''
-                    files_match:
-                        zzzfm_f9kkbza7ybw7:
-                            path: \.php$
-                            sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
-                            custom_fragment: ''
-                            provider: filesmatch
-                    provider: directory
+            files_match:
+                zzzfm_f9kkbza7ybw7:
+                    path: \.php$
+                    sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
+                    custom_fragment: ''
+                    provider: filesmatch
 letsencrypt:
     install: '1'
     settings:
