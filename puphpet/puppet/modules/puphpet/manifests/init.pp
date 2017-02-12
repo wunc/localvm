@@ -108,4 +108,8 @@ class puphpet  (
     include ::puphpet::wpcli
   }
 
+  if array_true($puphpet::params::hiera['yarn'], 'install') {
+    include ::puphpet::yarn::install
+  }
+
 }

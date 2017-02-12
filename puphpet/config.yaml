@@ -94,7 +94,6 @@ server:
         - libxrender1
         - libfontconfig1
         - libxext6
-        - yarn
 users_groups:
     install: '1'
     groups: {  }
@@ -404,6 +403,8 @@ nodejs:
         - gulp-sourcemaps
         - gulp-uglify
         - gulp-autoprefixer
+yarn:
+    install: '1'
 hhvm:
     install: '0'
     composer: '1'

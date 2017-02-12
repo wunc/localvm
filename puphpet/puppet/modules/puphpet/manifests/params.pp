@@ -45,6 +45,7 @@ class puphpet::params (
     wpcli          => hiera_hash('wpcli', {}),
     xdebug         => hiera_hash('xdebug', {}),
     xhprof         => hiera_hash('xhprof', {}),
+    yarn           => hiera_hash('yarn', {}),
   }
 
 }
