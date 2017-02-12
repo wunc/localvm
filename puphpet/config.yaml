@@ -90,6 +90,7 @@ server:
     packages:
         - vim
         - htop
+        - libnotify-bin
         - libxrender1
         - libfontconfig1
         - libxext6
