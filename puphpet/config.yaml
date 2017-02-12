@@ -430,7 +430,9 @@ mysql:
     settings:
         version: '5.7'
         root_password: '123'
-        override_options: {  }
+        override_options:
+            mysqld:
+                character-set-server: 'utf8mb4'
     adminer: '0'
     users: {  }
     databases: {  }
