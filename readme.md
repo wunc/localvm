@@ -138,6 +138,16 @@ Cmnd_Alias VAGRANT_EXPORTS_REMOVE = /usr/bin/sed -E -e * d -ibak /etc/exports
 
 You can change %admin to your own username or `%staff` if you are not a local admin.
 
+#### Backup Databases
+
+Since the databases are stored within the VM, they will be lost if you destroy the VM. However, localvm has been configured to auto-backup the databases on halt or destroy, as long as the plugin `vagrant-triggers` is installed. To install it:
+
+```bash
+vagrant plugin install vagrant-triggers
+```
+
+With that, whenever you halt or destroy your VM, the databases will be backed up to `~/Sites/vagrant-database-backup.sql.gz` on your host computer.
+
 #### Adminer:
 
 I recommend using a dedicated database tool, like [MySQL Workbench](http://www.mysql.com/products/workbench/) or [Sequel Pro](https://www.sequelpro.com/). The VM does come with Adminer, but it may be overwritten if you are upgrading from a previous version. Adminer is a single PHP file, and therefore is very easy to re-install: just [download it](https://www.adminer.org/) (I recommend the English-only MySQL version), save it as `~/Sites/adminer/index.php`. Then, you should be able to access it at `http://local.dev/adminer`.

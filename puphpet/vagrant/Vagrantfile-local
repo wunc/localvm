@@ -223,6 +223,17 @@ machines.each do |i, machine|
       end
     end
 
+    if Vagrant.has_plugin?('vagrant-triggers')
+      config.trigger.before [:halt, :destroy] do
+        info "Backing up the databases..."
+        synced_folder = data['vm']['synced_folder'].first[1]
+        backup_database_file = "#{synced_folder['target']}/vagrant-database-backup.sql.gz"
+        backup_database_pass = configValues['mysql']['settings']['root_password']
+        run_remote "export MYSQL_PWD=#{backup_database_pass}"
+        run_remote "mysqldump --all-databases -u root | gzip > #{backup_database_file}"
+      end
+    end
+
     chosen_virtualizer = provider['chosen_virtualizer']
 
     unless ENV.fetch('VAGRANT_DEFAULT_PROVIDER', '').strip.empty?
