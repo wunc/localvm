@@ -321,7 +321,7 @@ apache:
                     sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
                     custom_fragment: ''
                     provider: filesmatch
-        zzzy_local_dev:
+        zzzy_local_dev_ssl:
             servername: local.dev
             docroot: /var/www
             port: '443'
@@ -391,7 +391,7 @@ apache:
                     sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
                     custom_fragment: ''
                     provider: filesmatch
-        zzzz_wildcard_dev:
+        zzzz_wildcard_dev_ssl:
             servername: wildcard.dev
             serveraliases:
                 - '*.dev'
