@@ -179,6 +179,42 @@ apache:
                     sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
                     custom_fragment: ''
                     provider: filesmatch
+        zzzw_laravel_local_dev_ssl:
+            servername: lvl.local.dev
+            serveraliases:
+                - '*.lvl.dev'
+            docroot: /var/www
+            port: '443'
+            setenv:
+                - 'APP_ENV dev'
+            setenvif:
+                - 'Authorization "(.*)" HTTP_AUTHORIZATION=$1'
+            custom_fragment: /vagrant/puphpet/dev.lvl.conf
+            ssl: '1'
+            ssl_cert: ''
+            ssl_key: ''
+            ssl_chain: ''
+            ssl_certs_dir: ''
+            ssl_protocol: ''
+            ssl_cipher: ''
+            directories:
+                avd_k0brl484dbmb_ssl:
+                    path: /var/www
+                    options:
+                        - Indexes
+                        - FollowSymlinks
+                        - MultiViews
+                    allow_override:
+                        - All
+                    require:
+                        - 'all granted'
+                    custom_fragment: ''
+            files_match:
+                avdfm_f9kkbza7ycy9_ssl:
+                    path: \.php$
+                    sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
+                    custom_fragment: ''
+                    provider: filesmatch
         zzzx_wordpress_local_dev:
             servername: wp.local.dev
             serveraliases:
@@ -211,6 +247,42 @@ apache:
                     custom_fragment: ''
             files_match:
                 avdfm_f9kkbza7ybx8:
+                    path: \.php$
+                    sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
+                    custom_fragment: ''
+                    provider: filesmatch
+        zzzx_wordpress_local_dev_ssl:
+            servername: wp.local.dev
+            serveraliases:
+                - '*.wp.dev'
+            docroot: /var/www
+            port: '443'
+            setenv:
+                - 'APP_ENV dev'
+            setenvif:
+                - 'Authorization "(.*)" HTTP_AUTHORIZATION=$1'
+            custom_fragment: /vagrant/puphpet/dev.wp.conf
+            ssl: '1'
+            ssl_cert: ''
+            ssl_key: ''
+            ssl_chain: ''
+            ssl_certs_dir: ''
+            ssl_protocol: ''
+            ssl_cipher: ''
+            directories:
+                avd_k0brl373dbma_ssl:
+                    path: /var/www
+                    options:
+                        - Indexes
+                        - FollowSymlinks
+                        - MultiViews
+                    allow_override:
+                        - All
+                    require:
+                        - 'all granted'
+                    custom_fragment: ''
+            files_match:
+                avdfm_f9kkbza7ybx8_ssl:
                     path: \.php$
                     sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
                     custom_fragment: ''
@@ -249,6 +321,40 @@ apache:
                     sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
                     custom_fragment: ''
                     provider: filesmatch
+        zzzy_local_dev:
+            servername: local.dev
+            docroot: /var/www
+            port: '443'
+            setenv:
+                - 'APP_ENV dev'
+            setenvif:
+                - 'Authorization "(.*)" HTTP_AUTHORIZATION=$1'
+            custom_fragment: /vagrant/puphpet/dev.local.conf
+            ssl: '1'
+            ssl_cert: ''
+            ssl_key: ''
+            ssl_chain: ''
+            ssl_certs_dir: ''
+            ssl_protocol: ''
+            ssl_cipher: ''
+            directories:
+                avd_k0brl262dbma_ssl:
+                    path: /var/www
+                    options:
+                        - Indexes
+                        - FollowSymlinks
+                        - MultiViews
+                    allow_override:
+                        - All
+                    require:
+                        - 'all granted'
+                    custom_fragment: ''
+            files_match:
+                avdfm_f9kkbza7ybw7_ssl:
+                    path: \.php$
+                    sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
+                    custom_fragment: ''
+                    provider: filesmatch
         zzzz_wildcard_dev:
             servername: wildcard.dev
             serveraliases:
@@ -281,6 +387,42 @@ apache:
                     custom_fragment: ''
             files_match:
                 zzzfm_f9kkbza7ybw7:
+                    path: \.php$
+                    sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
+                    custom_fragment: ''
+                    provider: filesmatch
+        zzzz_wildcard_dev:
+            servername: wildcard.dev
+            serveraliases:
+                - '*.dev'
+            docroot: /var/www
+            port: '443'
+            setenv:
+                - 'APP_ENV dev'
+            setenvif:
+                - 'Authorization "(.*)" HTTP_AUTHORIZATION=$1'
+            custom_fragment: /vagrant/puphpet/dev.conf
+            ssl: '1'
+            ssl_cert: ''
+            ssl_key: ''
+            ssl_chain: ''
+            ssl_certs_dir: ''
+            ssl_protocol: ''
+            ssl_cipher: ''
+            directories:
+                zzz_k0brl262dbma_ssl:
+                    path: /var/www
+                    options:
+                        - Indexes
+                        - FollowSymlinks
+                        - MultiViews
+                    allow_override:
+                        - All
+                    require:
+                        - 'all granted'
+                    custom_fragment: ''
+            files_match:
+                zzzfm_f9kkbza7ybw7_ssl:
                     path: \.php$
                     sethandler: 'proxy:unix:/var/run/php5-fpm.sock|fcgi://localhost'
                     custom_fragment: ''
