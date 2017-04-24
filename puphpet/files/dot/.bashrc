@@ -63,7 +63,7 @@ alias gc='git commit'
 alias gd='git diff'
 alias go='git checkout '
 alias gsc='git rev-parse --short HEAD | xargs echo -n | pbcopy' # copy short commit hash to clipboard
-alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+alias gl="git log --color --graph --tags --remotes=* --branches=* --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
 alias glb='gl master..'
 
 # laravel
