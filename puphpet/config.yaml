@@ -14,6 +14,8 @@ vagrantfile:
                         showgui: 0
                     vmware:
                         numvcpus: 1
+                        ethernet0.pcislotnumber: 32
+                        ethernet1.pcislotnumber: 33
                     parallels:
                         linked_clone: 0
                         check_guest_tools: 0
