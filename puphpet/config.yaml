@@ -23,7 +23,7 @@ vagrantfile:
                 machines:
                     vflm_16wifcf45ve4:
                         id: localvm
-                        hostname: local.dev
+                        hostname: local.test
                         network:
                             private_network: 192.168.57.101
                             forwarded_port:
@@ -146,16 +146,16 @@ apache:
         - deflate
     vhosts:
         zzzw_laravel_local_dev:
-            servername: lvl.local.dev
+            servername: lvl.local.test
             serveraliases:
-                - '*.lvl.dev'
+                - '*.lvl.test'
             docroot: /var/www
             port: '80'
             setenv:
                 - 'APP_ENV dev'
             setenvif:
                 - 'Authorization "(.*)" HTTP_AUTHORIZATION=$1'
-            custom_fragment: /vagrant/puphpet/dev.lvl.conf
+            custom_fragment: /vagrant/puphpet/test.lvl.conf
             ssl: '0'
             ssl_cert: ''
             ssl_key: ''
@@ -182,16 +182,16 @@ apache:
                     custom_fragment: ''
                     provider: filesmatch
         zzzw_laravel_local_dev_ssl:
-            servername: lvl.local.dev
+            servername: lvl.local.test
             serveraliases:
-                - '*.lvl.dev'
+                - '*.lvl.test'
             docroot: /var/www
             port: '443'
             setenv:
                 - 'APP_ENV dev'
             setenvif:
                 - 'Authorization "(.*)" HTTP_AUTHORIZATION=$1'
-            custom_fragment: /vagrant/puphpet/dev.lvl.conf
+            custom_fragment: /vagrant/puphpet/test.lvl.conf
             ssl: '1'
             ssl_cert: ''
             ssl_key: ''
@@ -218,16 +218,16 @@ apache:
                     custom_fragment: ''
                     provider: filesmatch
         zzzx_wordpress_local_dev:
-            servername: wp.local.dev
+            servername: wp.local.test
             serveraliases:
-                - '*.wp.dev'
+                - '*.wp.test'
             docroot: /var/www
             port: '80'
             setenv:
                 - 'APP_ENV dev'
             setenvif:
                 - 'Authorization "(.*)" HTTP_AUTHORIZATION=$1'
-            custom_fragment: /vagrant/puphpet/dev.wp.conf
+            custom_fragment: /vagrant/puphpet/test.wp.conf
             ssl: '0'
             ssl_cert: ''
             ssl_key: ''
@@ -254,16 +254,16 @@ apache:
                     custom_fragment: ''
                     provider: filesmatch
         zzzx_wordpress_local_dev_ssl:
-            servername: wp.local.dev
+            servername: wp.local.test
             serveraliases:
-                - '*.wp.dev'
+                - '*.wp.test'
             docroot: /var/www
             port: '443'
             setenv:
                 - 'APP_ENV dev'
             setenvif:
                 - 'Authorization "(.*)" HTTP_AUTHORIZATION=$1'
-            custom_fragment: /vagrant/puphpet/dev.wp.conf
+            custom_fragment: /vagrant/puphpet/test.wp.conf
             ssl: '1'
             ssl_cert: ''
             ssl_key: ''
@@ -290,14 +290,14 @@ apache:
                     custom_fragment: ''
                     provider: filesmatch
         zzzy_local_dev:
-            servername: local.dev
+            servername: local.test
             docroot: /var/www
             port: '80'
             setenv:
                 - 'APP_ENV dev'
             setenvif:
                 - 'Authorization "(.*)" HTTP_AUTHORIZATION=$1'
-            custom_fragment: /vagrant/puphpet/dev.local.conf
+            custom_fragment: /vagrant/puphpet/test.local.conf
             ssl: '0'
             ssl_cert: ''
             ssl_key: ''
@@ -324,14 +324,14 @@ apache:
                     custom_fragment: ''
                     provider: filesmatch
         zzzy_local_dev_ssl:
-            servername: local.dev
+            servername: local.test
             docroot: /var/www
             port: '443'
             setenv:
                 - 'APP_ENV dev'
             setenvif:
                 - 'Authorization "(.*)" HTTP_AUTHORIZATION=$1'
-            custom_fragment: /vagrant/puphpet/dev.local.conf
+            custom_fragment: /vagrant/puphpet/test.local.conf
             ssl: '1'
             ssl_cert: ''
             ssl_key: ''
@@ -358,16 +358,16 @@ apache:
                     custom_fragment: ''
                     provider: filesmatch
         zzzz_wildcard_dev:
-            servername: wildcard.dev
+            servername: wildcard.test
             serveraliases:
-                - '*.dev'
+                - '*.test'
             docroot: /var/www
             port: '80'
             setenv:
                 - 'APP_ENV dev'
             setenvif:
                 - 'Authorization "(.*)" HTTP_AUTHORIZATION=$1'
-            custom_fragment: /vagrant/puphpet/dev.conf
+            custom_fragment: /vagrant/puphpet/test.conf
             ssl: '0'
             ssl_cert: ''
             ssl_key: ''
@@ -394,16 +394,16 @@ apache:
                     custom_fragment: ''
                     provider: filesmatch
         zzzz_wildcard_dev_ssl:
-            servername: wildcard.dev
+            servername: wildcard.test
             serveraliases:
-                - '*.dev'
+                - '*.test'
             docroot: /var/www
             port: '443'
             setenv:
                 - 'APP_ENV dev'
             setenvif:
                 - 'Authorization "(.*)" HTTP_AUTHORIZATION=$1'
-            custom_fragment: /vagrant/puphpet/dev.conf
+            custom_fragment: /vagrant/puphpet/test.conf
             ssl: '1'
             ssl_cert: ''
             ssl_key: ''
