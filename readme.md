@@ -43,6 +43,21 @@ vagrant up
 
 The last command will take a while to complete (the first time you run it), as it has to download the image, install it, run it, and install all of the included software.
 
++++++++++++++
+
+**NOTE:**
+ - If you experience errors with 'vagrant up' under VMWare Fusion, there are a couple things to check.
+ 
+      - Check that the file '/Library/Preferences/VMWare\ Fusion/networking' exists.
+          - If not, issue 
+          `sudo touch /Library/Preferences/VMWare\ Fusion/networking` in the terminal.
+      - VMWare Fusion also tries to install a Kernel Extension on the Mac but may not display an error if it's unsuccessful.
+          - Open System Preferences -> Security & Privacy -> General
+              - `If an error is displayed, click Allow to fix the error`
+      - Then go back to the localvm directory and issue 'vagrant up'
+      
++++++++++++++
+
 - Edit your `hosts` file:
 
 ```bash
@@ -52,9 +67,9 @@ sudo nano /etc/hosts
 - Add the following to the bottom of your `hosts` file:
 
 ```
-192.168.57.101	local.dev
-192.168.57.101  www.local.dev
-192.168.57.101  localvm.dev
+192.168.57.101	local.test
+192.168.57.101  www.local.test
+192.168.57.101  localvm.test
 ```
 
 along with any other dev domains that you would like to set up
@@ -64,7 +79,7 @@ along with any other dev domains that you would like to set up
 - Local editing:
 	- put your websites in subfolders of `~/Sites`.
 	- any local edits to files in that directory will quickly auto-sync to the VM.
-	- example: you might create `~/Sites/wordpress`. You can then access it at `http://local.dev/wordpress`.
+	- example: you might create `~/Sites/wordpress`. You can then access it at `http://local.test/wordpress`.
 - Vagrant commands (must be run while in the `localvm` folder)
 	- `vagrant up` # start the VM
 	- `vagrant halt` # shut down the VM
@@ -74,16 +89,16 @@ along with any other dev domains that you would like to set up
 	- `vagrant provision` # read the config.yaml file and apply any changes to the VM
 - Web server:
 	- [http://192.168.57.101](http://192.168.57.101)
-	- [http://local.dev](http://local.dev)
+	- [http://local.test](http://local.test)
 - MySQL server:
 	- mysql username: `root`, password: `123`
 	- extra mysql username: `dbuser`, password: `123`
 	- Sequel Pro or MySQL Workbench: use SSH tunnel to SSH Host `192.168.57.101` with username `vagrant` and ssh-key `Vagrant/localvm/puphpet/files/dot/ssh/id_rsa`. MySQL Host `127.0.0.1` with username `root` and password `123`. 
-- Adminer (replaces PHPMyAdmin; see [below](#adminer))
-	- [http://local.dev/html/adminer](http://local.dev/html/adminer)
+- Adminer (replaces PHPMyAdmin; see [below](#Adminer))
+	- [http://local.test/html/adminer](http://local.test/html/adminer)
 - MailHog (replaces Mailcatcher)
 	- [http://192.168.57.101:8025](http://192.168.57.101:8025)
-	- [http://local.dev:8025](http://local.dev:8025)
+	- [http://local.test:8025](http://local.test:8025)
 
 ### Optional Nice Stuff
 
@@ -92,11 +107,11 @@ along with any other dev domains that you would like to set up
 The Apache web server is configured to accept certain virtual hostname patterns and properly set the VirtualDocumentRoot for them. This way, you don't have to edit the `config-custom.yaml` and re-provision the VM every time you want to add a new vhost.
 
 - Bedrock-style WordPress
-	- `*.wp.dev` uses `/var/www/*/web` (~/Sites/*/web on your computer) as its DocumentRoot
+	- `*.wp.test` uses `/var/www/*/web` (~/Sites/*/web on your computer) as its DocumentRoot
 - Laravel
-	- `*.lvl.dev` uses `/var/www/*/public` (~/Sites/*/web on your computer) as its DocumentRoot
+	- `*.lvl.test` uses `/var/www/*/public` (~/Sites/*/web on your computer) as its DocumentRoot
 - General
-	- `*.dev` uses `/var/www/*` (`~/Sites/*` on your computer) as its DocumentRoot
+	- `*.test` uses `/var/www/*` (`~/Sites/*` on your computer) as its DocumentRoot
 
 In order for this to work, your computer must have it's DNS set up to also dynamically point to the Vagrant VM. For Macs, you can install dnsmasq via Homebrew:
 
@@ -107,7 +122,7 @@ brew update
 brew install dnsmasq
 # Create the dnsmasq.conf file
 mkdir -pv $(brew --prefix)/etc/
-echo 'address=/.dev/192.168.57.101' > $(brew --prefix)/etc/dnsmasq.conf
+echo 'address=/.test/192.168.57.101' > $(brew --prefix)/etc/dnsmasq.conf
 echo 'listen-address=127.0.0.1' >> $(brew --prefix)/etc/dnsmasq.conf
 # Add dnsmasq to the list of DNS resolvers
 sudo mkdir -v /etc/resolver
@@ -150,7 +165,7 @@ With that, whenever you halt or destroy your VM, the databases will be backed up
 
 #### Adminer:
 
-I recommend using a dedicated database tool, like [MySQL Workbench](http://www.mysql.com/products/workbench/) or [Sequel Pro](https://www.sequelpro.com/). The VM does come with Adminer, but it may be overwritten if you are upgrading from a previous version. Adminer is a single PHP file, and therefore is very easy to re-install: just [download it](https://www.adminer.org/) (I recommend the English-only MySQL version), save it as `~/Sites/adminer/index.php`. Then, you should be able to access it at `http://local.dev/adminer`.
+I recommend using a dedicated database tool, like [MySQL Workbench](http://www.mysql.com/products/workbench/) or [Sequel Pro](https://www.sequelpro.com/). The VM does come with Adminer, but it may be overwritten if you are upgrading from a previous version. Adminer is a single PHP file, and therefore is very easy to re-install: just [download it](https://www.adminer.org/) (I recommend the English-only MySQL version), save it as `~/Sites/adminer/index.php`. Then, you should be able to access it at `http://local.test/adminer`.
 
 #### Set the VM system timezone
 
