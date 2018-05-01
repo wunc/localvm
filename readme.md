@@ -72,7 +72,7 @@ sudo nano /etc/hosts
 192.168.57.101  localvm.test
 ```
 
-along with any other dev domains that you would like to set up
+along with any other *.test domains that you would like to set up
 
 ### Usage
 
@@ -126,7 +126,7 @@ echo 'address=/.test/192.168.57.101' > $(brew --prefix)/etc/dnsmasq.conf
 echo 'listen-address=127.0.0.1' >> $(brew --prefix)/etc/dnsmasq.conf
 # Add dnsmasq to the list of DNS resolvers
 sudo mkdir -v /etc/resolver
-sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/dev'
+sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/test'
 # Start the dnsmasq service
 sudo brew services start dnsmasq
 ```
