@@ -241,14 +241,16 @@ machines.each do |i, machine|
       end
     end
 
-    if Vagrant.has_plugin?('vagrant-triggers')
-      config.trigger.before [:halt, :destroy], :force => true do
-        info "Backing up the databases..."
+    # Backup the MySQL databases on VM halt or destroy
+    if Vagrant::VERSION >= '2.1.0'
+      config.trigger.before [:halt, :destroy] do |trigger|
+        trigger.name = "Database Backup"
+        trigger.on_error = :continue
         synced_folder = data['vm']['synced_folder'].first[1]
         backup_database_file = "#{synced_folder['target']}/vagrant-database-backup.sql.gz"
         backup_database_pass = configValues['mysql']['settings']['root_password']
-        run_remote "export MYSQL_PWD=#{backup_database_pass}"
-        run_remote "mysqldump --all-databases -u root | gzip > #{backup_database_file}"
+        trigger.info = "Backing up VM MySQL databases to #{backup_database_file}"
+        trigger.run_remote = {inline: "export MYSQL_PWD=#{backup_database_pass}; mysqldump --all-databases -u root | gzip > #{backup_database_file}"}
       end
     end
 

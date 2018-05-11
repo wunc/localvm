@@ -155,11 +155,7 @@ You can change %admin to your own username or `%staff` if you are not a local ad
 
 #### Backup Databases
 
-Since the databases are stored within the VM, they will be lost if you destroy the VM. However, localvm has been configured to auto-backup the databases on halt or destroy, as long as the plugin `vagrant-triggers` is installed. To install it:
-
-```bash
-vagrant plugin install vagrant-triggers
-```
+Since the databases are stored within the VM, they will be lost if you destroy the VM. However, localvm has been configured to auto-backup the databases on halt or destroy, as long as you have Vagrant version >= 2.1.0 installed.
 
 With that, whenever you halt or destroy your VM, the databases will be backed up to `~/Sites/vagrant-database-backup.sql.gz` on your host computer.
 
